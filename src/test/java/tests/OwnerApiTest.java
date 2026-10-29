@@ -2,7 +2,6 @@ package tests;
 
 import DTO.OwnerDTO;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,12 +19,13 @@ import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.DisplayName;
 import io.qameta.allure.Allure;
 
-import io.qameta.allure.restassured.AllureRestAssured;
+import org.junit.jupiter.api.Tag;
 
 @Epic("PetClinic API")
 @Feature("Управление владельцами")
 public class OwnerApiTest extends BaseTest {
 
+    @Tag("smoke")
     @Test
     @Story("Получение списка владельцев")
     @DisplayName("Успешное получение списка владельцев")
@@ -56,6 +56,7 @@ public class OwnerApiTest extends BaseTest {
         Allure.step("Проверить что фамилия не пустая", () -> assertThat(lastName).isNotBlank());
     }
 
+    @Tag("smoke")
     @Test
     @Story("Получение владельца через ID")
     @DisplayName("Успешное получение владельца по ID")

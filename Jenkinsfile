@@ -7,6 +7,14 @@ pipeline {
         BASE_URL = 'http://petclinic:9966/petclinic'
     }
 
+    parameters {
+        choice(
+            name: 'TEST_SUITE',
+            choices: ['SMOKE', 'REGRESSION'],
+            description: 'Выберите набор тестов'
+        )
+    }
+
     stages {
         stage('Check Environment') {
             steps {
@@ -15,9 +23,13 @@ pipeline {
             }
         }
         stage('Run API Tests') {
-            steps {
-                sh 'mvn clean test'
-            }
+            script {
+                        if (params.TEST_SUITE == 'SMOKE') {
+                            sh 'mvn clean test -Dgroups=smoke'
+                        } else {
+                            sh 'mvn clean test'
+                        }
+                    }
         }
     }
     post {
