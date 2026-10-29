@@ -14,5 +14,10 @@ pipeline {
                 sh 'mvn -version'
             }
         }
+        stage('Run API Tests') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
     }
 }
