@@ -23,6 +23,11 @@ pipeline {
     post {
         always {
             junit 'target/surefire-reports/*.xml'
+
+            allure(
+                  commandline: 'allure2',
+                  results: [[path: 'target/allure-results']]
+            )
         }
     }
 }
