@@ -23,13 +23,15 @@ pipeline {
             }
         }
         stage('Run API Tests') {
-            script {
-                        if (params.TEST_SUITE == 'SMOKE') {
-                            sh 'mvn clean test -Dgroups=smoke'
-                        } else {
-                            sh 'mvn clean test'
-                        }
+            steps {
+                script {
+                    if (params.TEST_SUITE == 'SMOKE') {
+                        sh 'mvn clean test -Dgroups=smoke'
+                    } else {
+                        sh 'mvn clean test'
                     }
+                }
+            }
         }
     }
     post {
